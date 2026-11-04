@@ -1,0 +1,30 @@
+{
+  "name": "Jendekhune",
+  "description": "jendekhune.com source",
+  "author": "amzolghadr",
+  "authorUrl": "https://github.com/amzolghadr",
+  "repositoryUrl": "https://github.com/amzolghadr/rfffr",
+  "sourceUrl": "https://github.com/amzolghadr/rfffr",
+  "scriptUrl": "https://raw.githubusercontent.com/amzolghadr/rfffr/main/JendekhuneScript.js",
+  "iconUrl": "https://jendekhune.com/favicon.ico",
+  "id": "5e6b8a53-7c9d-4d64-afb5-da6b8e0b7c96",
+  "packages": ["Http"],
+  "allowUrls": ["jendekhune.com", "jendekhune.net", "sendvid.com", "streamtape.com", "gofile.io", "bunkr.si", "lulustream.com"],
+  "version": 1,
+  "captcha": false,
+  "settings": [],
+  "script": {
+    "getHome": "getHome",
+    "search": "search",
+    "getSearchSuggestions": "getSearchSuggestions",
+    "isChannelUrl": "isChannelUrl",
+    "getChannel": "getChannel",
+    "getChannelContents": "getChannelContents",
+    "getVideoDetails": "getVideoDetails",
+    "isVideoUrl": "isVideoUrl",
+    "getContentDetails": "getContentDetails",
+    "getPlaybackSource": "getPlaybackSource",
+    "getSearchCapabilities": "getSearchCapabilities",
+    "getChannelCapabilities": "getChannelCapabilities"
+  }
+}
