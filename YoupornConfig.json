@@ -1,0 +1,19 @@
+{
+  "name": "YouPorn",
+  "description": "Browse and search YouPorn in Grayjay (adults only, 18+).",
+  "author": "Personal",
+  "authorUrl": "https://github.com/amzolghadr",
+  "sourceUrl": "https://raw.githubusercontent.com/amzolghadr/rfffr/main/youporn/YoupornConfig.json",
+  "repositoryUrl": "https://github.com/amzolghadr/rfffr",
+  "scriptUrl": "./YoupornScript.js",
+  "version": 1,
+  "iconUrl": "./youporn.png",
+  "id": "1e48381a-8988-4df8-97db-1204c4061d74",
+  "scriptSignature": "",
+  "scriptPublicKey": "",
+  "packages": ["Http"],
+  "allowEval": false,
+  "allowUrls": ["youporn.com", "www.youporn.com", "ypncdn.com", "phncdn.com"],
+  "authentication": null,
+  "constants": {}
+}

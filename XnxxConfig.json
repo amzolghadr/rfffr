@@ -1,0 +1,19 @@
+{
+  "name": "XNXX",
+  "description": "Browse and search XNXX in Grayjay (adults only, 18+).",
+  "author": "Personal",
+  "authorUrl": "",
+  "sourceUrl": "https://raw.githubusercontent.com/amzolghadr/rfffr/main/xnxx/XnxxConfig.json",
+  "repositoryUrl": "https://github.com/amzolghadr/rfffr",
+  "scriptUrl": "./XnxxScript.js",
+  "version": 1,
+  "iconUrl": "./xnxx.png",
+  "id": "92f67e5f-c454-46ff-8011-95234bcb8bc9",
+  "scriptSignature": "",
+  "scriptPublicKey": "",
+  "packages": ["Http"],
+  "allowEval": false,
+  "allowUrls": ["xnxx.com", "www.xnxx.com"],
+  "authentication": null,
+  "constants": {}
+}
