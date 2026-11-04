@@ -1,0 +1,30 @@
+{
+  "name": "HN-Gashts",
+  "description": "hn-gashts.com Persian-subbed hentai",
+  "author": "amzolghadr",
+  "authorUrl": "https://github.com/amzolghadr",
+  "repositoryUrl": "https://github.com/amzolghadr/rfffr",
+  "sourceUrl": "https://github.com/amzolghadr/rfffr",
+  "scriptUrl": "https://raw.githubusercontent.com/amzolghadr/rfffr/main/HnGashtsScript.js",
+  "iconUrl": "https://hn-gashts.com/favicon.ico",
+  "id": "3d5a7f42-6b8c-4c53-9ea4-cf5a7d9a6b85",
+  "packages": ["Http"],
+  "allowUrls": ["hn-gashts.com"],
+  "version": 1,
+  "captcha": false,
+  "settings": [],
+  "script": {
+    "getHome": "getHome",
+    "search": "search",
+    "getSearchSuggestions": "getSearchSuggestions",
+    "isChannelUrl": "isChannelUrl",
+    "getChannel": "getChannel",
+    "getChannelContents": "getChannelContents",
+    "getVideoDetails": "getVideoDetails",
+    "isVideoUrl": "isVideoUrl",
+    "getContentDetails": "getContentDetails",
+    "getPlaybackSource": "getPlaybackSource",
+    "getSearchCapabilities": "getSearchCapabilities",
+    "getChannelCapabilities": "getChannelCapabilities"
+  }
+}
