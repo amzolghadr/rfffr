@@ -2,6 +2,7 @@ const BASE = "https://www.taktube.net";
 const PLATFORM = "TakTube";
 const PLUGIN_ID = "b3f7c2a1-9d4e-4a6b-8c15-7e2f9a0d3c64";
 const UA = "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36";
+const FALLBACK_THUMB = "https://www.taktube.net/content/uploads/2024/10/favicon-32x32-1.png";
 
 let config = {};
 
@@ -94,7 +95,7 @@ function parseListing(html) {
         results.push(new PlatformVideo({
             id: new PlatformID(PLATFORM, idFromUrl(url), PLUGIN_ID),
             name: title,
-            thumbnails: thumb ? new Thumbnails([new Thumbnail(thumb, 0)]) : new Thumbnails([]),
+            thumbnails: new Thumbnails([new Thumbnail(thumb || FALLBACK_THUMB, 0)]),
             author: AUTHOR,
             datetime: 0,
             duration: duration,
@@ -207,12 +208,11 @@ source.getContentDetails = function (url) {
     videoUrl = absolute(videoUrl);
 
     const duration = isoToSeconds((/<meta[^>]+itemprop="duration"[^>]+content="([^"]*)"/i.exec(html) || [])[1])
-        || toSeconds((/<span class="duration">([\s\S]*?)<\/span>/i.exec(html) || ["", ""])[1].replace(/<[^>]+>/g, "").trim());
+        || toSeconds(((/<span class="duration">([\s\S]*?)<\/span>/i.exec(html) || ["", ""])[1] || "").replace(/<[^>]+>/g, "").trim());
 
     const upload = (/<meta[^>]+itemprop="uploadDate"[^>]+content="([^"]*)"/i.exec(html) || [])[1];
     const datetime = upload ? Math.floor(new Date(upload).getTime() / 1000) : 0;
 
-    // actors
     const authors = [AUTHOR];
     const actorBlock = /<div id="video-actors">([\s\S]*?)<\/div>/i.exec(html);
     if (actorBlock) {
@@ -227,7 +227,6 @@ source.getContentDetails = function (url) {
         }
     }
 
-    // categories as hashtags
     const tags = [];
     const tagRe = /<a[^>]+href="[^"]*\/(?:tag|category)\/[^"]*"[^>]*title="([^"]*)"/gi;
     let tm;
@@ -239,7 +238,7 @@ source.getContentDetails = function (url) {
     return new PlatformVideoDetails({
         id: new PlatformID(PLATFORM, idFromUrl(url), PLUGIN_ID),
         name: title,
-        thumbnails: thumb ? new Thumbnails([new Thumbnail(thumb, 0)]) : new Thumbnails([]),
+        thumbnails: new Thumbnails([new Thumbnail(thumb || FALLBACK_THUMB, 0)]),
         author: AUTHOR,
         datetime: datetime,
         duration: duration,
@@ -262,7 +261,7 @@ source.getContentDetails = function (url) {
         rating: new RatingLikes(0),
         subtitles: [],
         hashtags: tags,
-        getContentRecommendations: (url) => getRecommendations(url)
+        getContentRecommendations: (u) => getRecommendations(u)
     });
 };
 
@@ -271,8 +270,7 @@ function getRecommendations(url) {
     let html = "";
     try { html = get(url); } catch (e) { return new ContentPager([], false); }
     const block = /<div class="under-video-block">([\s\S]*?)<\/div>\s*<div class="clear">/i.exec(html);
-    const scope = block ? block[1] : html;
-    const results = parseListing(scope);
+    const results = parseListing(block ? block[1] : html);
     return new ContentPager(results, false);
 }
 
