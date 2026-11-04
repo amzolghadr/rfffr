@@ -150,18 +150,55 @@ source.isVideoUrl = function (url) {
     return !/^(category|models|studio|topic|page|search|feed)$/i.test(m[1]);
 };
 
-function extractSources(html) {
+function scan(html) {
     const out = [];
-    const re = /<source[^>]+src="([^"]+)"/gi;
     let m;
+    let re = /<source[^>]+src=["']([^"']+)["']/gi;
     while ((m = re.exec(html))) out.push(abs(dec(m[1])));
-    const re2 = /(?:video_url|file)\s*[:=]\s*["']([^"']+\.(?:mp4|m3u8)[^"']*)["']/gi;
-    while ((m = re2.exec(html))) out.push(abs(dec(m[1])));
+    re = /<video[^>]+src=["']([^"']+)["']/gi;
+    while ((m = re.exec(html))) out.push(abs(dec(m[1])));
+    re = /(?:video_url|videoUrl|videoSrc|file|source|src)\s*[:=]\s*["']([^"']+\.(?:mp4|m3u8|webm)[^"']*)["']/gi;
+    while ((m = re.exec(html))) out.push(abs(dec(m[1])));
+    re = /(?:data-[a-z-]+)=["'](https?:\/\/[^"']+\.(?:mp4|m3u8|webm)[^"']*)["']/gi;
+    while ((m = re.exec(html))) out.push(m[1]);
+    re = /https?:\/\/[^"'\s<>\\]+\.(?:mp4|m3u8|webm)(?:\?[^"'\s<>\\]*)?/gi;
+    while ((m = re.exec(html))) out.push(m[0]);
+    return out;
+}
+
+function embeds(html) {
+    const out = [];
+    let m;
+    let re = /<iframe[^>]+src=["']([^"']+)["']/gi;
+    while ((m = re.exec(html))) out.push(abs(dec(m[1])));
+    re = /(?:data-src|data-embed|data-video)=["']([^"']+)["']/gi;
+    while ((m = re.exec(html))) {
+        const u = abs(dec(m[1]));
+        if (!/\.(?:mp4|m3u8|jpg|png|webp)$/i.test(u)) out.push(u);
+    }
+    return out.filter((v, i, a) => a.indexOf(v) === i && !/incestflix\.com\.co\/[^\/]+\/?$/i.test(v)).slice(0, 3);
+}
+
+function extractSources(html) {
+    let out = scan(html);
     if (!out.length) {
-        const b = html.match(/https?:\/\/[^"'\s<>]+\.mp4[^"'\s<>]*/i);
-        if (b) out.push(b[0]);
+        for (const e of embeds(html)) {
+            try {
+                const inner = req(e, BASE + "/");
+                out = out.concat(scan(inner));
+            } catch (err) { }
+        }
     }
     return out.filter((v, i, a) => a.indexOf(v) === i);
+}
+
+function descriptor(srcs, referer) {
+    const d = new VideoSourceDescriptor(srcs.map(s => new VideoUrlSource({
+        url: s,
+        mimeType: s.indexOf(".m3u8") >= 0 ? "application/x-mpegURL" : "video/mp4"
+    })));
+    try { d.headers = { "Referer": referer }; } catch (e) { }
+    return d;
 }
 
 source.getVideoDetails = function (url) {
@@ -189,10 +226,7 @@ source.getVideoDetails = function (url) {
         url: url,
         isLive: false,
         description: new Description(desc, DescriptionType.PLAINTEXT),
-        video: new VideoSourceDescriptor(
-            srcs.map(s => new VideoUrlSource({ url: s, mimeType: "video/mp4" })),
-            { "Referer": url }
-        )
+        video: descriptor(srcs, url)
     });
 };
 
@@ -201,8 +235,5 @@ source.getContentDetails = source.getVideoDetails;
 source.getPlaybackSource = function (url) {
     const srcs = extractSources(req(url));
     if (!srcs.length) throw new ScriptException("No source found");
-    return new VideoSourceDescriptor(
-        srcs.map(s => new VideoUrlSource({ url: s, mimeType: "video/mp4" })),
-        { "Referer": url }
-    );
+    return descriptor(srcs, url);
 };
