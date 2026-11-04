@@ -145,11 +145,9 @@ source.getChannelContents = function (url, type, order, filters, continuationTok
 };
 
 source.isVideoUrl = function (url) {
-    if (!/incestflix\.com\.co/i.test(url)) return false;
-    const p = url.replace(/^https?:\/\/[^\/]+/i, "").split("?")[0].split("#")[0];
-    if (!p || p === "/") return false;
-    if (/^\/(category|models|studio|topic|page|search)\//i.test(p)) return false;
-    return /^\/[^\/]+\/?$/.test(p);
+    const m = String(url).match(/incestflix\.com\.co\/([^\/?#]+)/i);
+    if (!m) return false;
+    return !/^(category|models|studio|topic|page|search|feed)$/i.test(m[1]);
 };
 
 function extractSources(html) {
