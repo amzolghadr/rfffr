@@ -1,0 +1,23 @@
+{
+  "name": "TakTube",
+  "description": "Unofficial plugin for taktube.net (18+) - Persian amateur porn",
+  "author": "Zolghadr",
+  "authorUrl": "https://github.com/amzolghadr",
+  "platformUrl": "https://www.taktube.net",
+  "sourceUrl": "https://raw.githubusercontent.com/USERNAME/grayjay-taktube/main/TakTubeConfig.json",
+  "repositoryUrl": "https://github.com/USERNAME/grayjay-taktube",
+  "scriptUrl": "./TakTubeScript.js",
+  "version": 1,
+  "iconUrl": "https://www.taktube.net/content/uploads/2024/10/favicon-32x32-1.png",
+  "id": "b3f7c2a1-9d4e-4a6b-8c15-7e2f9a0d3c64",
+  "scriptSignature": "",
+  "scriptPublicKey": "",
+  "packages": ["Http"],
+  "allowEval": false,
+  "allowUrls": [
+    "taktube.net",
+    "www.taktube.net",
+    "takcdn.com",
+    "tube24.takcdn.com"
+  ]
+}
