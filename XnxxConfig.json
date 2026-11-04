@@ -11,7 +11,7 @@
   "id": "92f67e5f-c454-46ff-8011-95234bcb8bc9",
   "scriptSignature": "",
   "scriptPublicKey": "",
-  "packages": ["Http"],
+  "packages": ["Http", "DOMParser"],
   "allowEval": false,
   "allowUrls": ["xnxx.com", "www.xnxx.com"],
   "authentication": null,
