@@ -144,7 +144,13 @@ source.getChannelContents = function (url, type, order, filters, continuationTok
     return new VideoPager(items, items.length > 0, String(page + 1));
 };
 
-source.isVideoUrl = function (url) { return /\/(video|watch)\//i.test(url) || /\.html?$/i.test(url); };
+source.isVideoUrl = function (url) {
+    if (!/incestflix\.com\.co/i.test(url)) return false;
+    const p = url.replace(/^https?:\/\/[^\/]+/i, "").split("?")[0].split("#")[0];
+    if (!p || p === "/") return false;
+    if (/^\/(category|models|studio|topic|page|search)\//i.test(p)) return false;
+    return /^\/[^\/]+\/?$/.test(p);
+};
 
 function extractSources(html) {
     const out = [];
