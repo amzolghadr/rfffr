@@ -11,7 +11,7 @@
   "id": "1e48381a-8988-4df8-97db-1204c4061d74",
   "scriptSignature": "",
   "scriptPublicKey": "",
-  "packages": ["Http"],
+  "packages": ["Http", "DOMParser"],
   "allowEval": false,
   "allowUrls": ["youporn.com", "www.youporn.com", "ypncdn.com", "phncdn.com"],
   "authentication": null,
