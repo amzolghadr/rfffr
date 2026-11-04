@@ -1,0 +1,30 @@
+{
+  "name": "hanime",
+  "description": "hanime.tv hentai source",
+  "author": "amzolghadr",
+  "authorUrl": "https://github.com/amzolghadr",
+  "repositoryUrl": "https://github.com/amzolghadr/rfffr",
+  "sourceUrl": "https://github.com/amzolghadr/rfffr",
+  "scriptUrl": "https://raw.githubusercontent.com/amzolghadr/rfffr/main/HanimeScript.js",
+  "iconUrl": "https://hanime.tv/favicon.ico",
+  "id": "1c4f6e31-5a7b-4b42-8d93-be4f6c8f5a74",
+  "packages": ["Http"],
+  "allowUrls": ["hanime.tv", "hanime-cdn.com", "freeanimehentai.net"],
+  "version": 1,
+  "captcha": false,
+  "settings": [],
+  "script": {
+    "getHome": "getHome",
+    "search": "search",
+    "getSearchSuggestions": "getSearchSuggestions",
+    "isChannelUrl": "isChannelUrl",
+    "getChannel": "getChannel",
+    "getChannelContents": "getChannelContents",
+    "getVideoDetails": "getVideoDetails",
+    "isVideoUrl": "isVideoUrl",
+    "getContentDetails": "getContentDetails",
+    "getPlaybackSource": "getPlaybackSource",
+    "getSearchCapabilities": "getSearchCapabilities",
+    "getChannelCapabilities": "getChannelCapabilities"
+  }
+}
