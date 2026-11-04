@@ -1,0 +1,30 @@
+{
+  "name": "Luticlip",
+  "description": "Luticlip.com tube source",
+  "author": "amzolghadr",
+  "authorUrl": "https://github.com/amzolghadr",
+  "repositoryUrl": "https://github.com/amzolghadr/rfffr",
+  "sourceUrl": "https://github.com/amzolghadr/rfffr",
+  "scriptUrl": "https://raw.githubusercontent.com/amzolghadr/rfffr/main/LuticlipScript.js",
+  "iconUrl": "https://luticlip.com/favicon.ico",
+  "id": "5f1c8a3e-2b47-4d19-9c60-8a1e3f7b2d41",
+  "packages": ["Http"],
+  "allowUrls": ["luticlip.com", "luticlip.net"],
+  "version": 1,
+  "captcha": false,
+  "settings": [],
+  "script": {
+    "getHome": "getHome",
+    "search": "search",
+    "getSearchSuggestions": "getSearchSuggestions",
+    "isChannelUrl": "isChannelUrl",
+    "getChannel": "getChannel",
+    "getChannelContents": "getChannelContents",
+    "getVideoDetails": "getVideoDetails",
+    "isVideoUrl": "isVideoUrl",
+    "getContentDetails": "getContentDetails",
+    "getPlaybackSource": "getPlaybackSource",
+    "getSearchCapabilities": "getSearchCapabilities",
+    "getChannelCapabilities": "getChannelCapabilities"
+  }
+}
